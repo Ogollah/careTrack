@@ -54,7 +54,7 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
-                .antMatchers("/api/v1/**").authenticated()
+                .antMatchers("/api/v1/**").permitAll()
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint((req, res, ex) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "UNAUTHORIZED : " + ex.getMessage()))

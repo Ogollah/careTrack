@@ -64,14 +64,14 @@ public class VisitController {
     private PatientService patientService;
 
     // Retrieve all Visits
-    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
+//    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
     @GetMapping("/visits")
     List findAll() {
         return visitRepository.findAll();
     }
 
     // Retrieve a visit by ID
-    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
+//    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
     @GetMapping("/visit/{id}")
     ResponseEntity<Visit> findById(@PathVariable("id") @Min(1) Long id) {
         Visit visit = visitRepository.findById(id)
@@ -80,7 +80,7 @@ public class VisitController {
     }
 
     // Create a new visit
-    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
+//    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
     @PostMapping("/visit/{id}")
     ResponseEntity<?> createVisit(@Valid @RequestBody VisitDTO visitDTO, @PathVariable("id") @Min(1) Long id) {
         Patient patient = patientService.getPatientById(id);
@@ -98,7 +98,7 @@ public class VisitController {
     }
 
     // Update a Visit by ID
-    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
+//    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
     @PutMapping("/visit/{id}")
     ResponseEntity<Visit> updateVisit(@PathVariable("id") @Min(1) Long id, @Valid @RequestBody VisitDTO visitDTO) {
         Visit visit = visitRepository.findById(id)
@@ -110,7 +110,7 @@ public class VisitController {
     }
 
     // Delete a visit by ID
-    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
+//    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
     @DeleteMapping("/visit/{id}")
     ResponseEntity<String> deleteVisit(@PathVariable("id") @Min(1) Long id) {
         Visit visit = visitRepository.findById(id)

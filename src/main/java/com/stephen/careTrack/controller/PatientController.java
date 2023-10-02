@@ -65,14 +65,14 @@ public class PatientController {
     private PatientService patientService;
 
     // Retrieve all patients
-    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
+//    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
     @GetMapping("/patients")
     List findAll() {
         return patientService.getAllPatientsWithNames();
     }
 
     // Retrieve a patient by ID
-    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
+//    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
     @GetMapping("/patient/{id}")
     ResponseEntity<Patient> findById(@PathVariable("id") @Min(1) Long id) {
         Patient patient = patientRepository.findById(id)
@@ -81,7 +81,7 @@ public class PatientController {
     }
 
     // Create a new patient
-    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
+//    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
     @PostMapping("/patient")
     ResponseEntity<?> createPatient(@Valid @RequestBody PatientDTO patientDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -92,11 +92,11 @@ public class PatientController {
         Patient createPatient = patientRepository.save(patient);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(createPatient.getId()).toUri();
-        return ResponseEntity.created(location).body("Success");
+        return ResponseEntity.ok().body(patient);
     }
 
     // Update a patient by ID
-    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
+//    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
     @PutMapping("/patient/{id}")
     ResponseEntity<Patient> updatePatient(@PathVariable("id") @Min(1) Long id, @Valid @RequestBody PatientDTO patientDTO) {
         Patient hcw = patientRepository.findById(id)
@@ -108,7 +108,7 @@ public class PatientController {
     }
 
     // Delete a patient by ID
-    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
+//    @PreAuthorize("hasAnyRole('ADMIN','PROVIDER')")
     @DeleteMapping("/patient/{id}")
     ResponseEntity<String> deletePatient(@PathVariable("id") @Min(1) Long id) {
         Patient patient = patientRepository.findById(id)

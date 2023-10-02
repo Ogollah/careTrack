@@ -16,6 +16,7 @@ import com.stephen.careTrack.security.jwt.JwtResponseWithUserDetails;
 import com.stephen.careTrack.service.JwtTokenBlacklist;
 import com.stephen.careTrack.service.LocationService;
 import com.stephen.careTrack.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -57,6 +58,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Auth user", description = "Manages User authentication")
 public class AuthUserController {
 
     @Autowired

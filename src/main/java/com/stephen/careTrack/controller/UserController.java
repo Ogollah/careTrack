@@ -7,6 +7,12 @@ import com.stephen.careTrack.repository.UserRepository;
 import com.stephen.careTrack.security.jwt.JwtProvider;
 import com.stephen.careTrack.service.LocationService;
 import com.stephen.careTrack.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -46,6 +52,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api/v1")
 @Validated
+@Tag(name = "User", description = "Manages User operations")
 public class UserController {
 
     @Autowired
@@ -63,6 +70,12 @@ public class UserController {
     JwtProvider tokenProvider;
 
     // Create a new user
+    @Operation(summary = "Create a new user")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", content = {
+                    @Content(schema = @Schema(implementation = User.class), mediaType = "application/json"),
+            }, description = "Creation OK"),
+    })
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/user")
     ResponseEntity<?> createUser(@Valid @RequestBody UserDTO userDTO) {
